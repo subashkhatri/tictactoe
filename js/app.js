@@ -24,8 +24,8 @@ $(document).ready(function () {
 
     ) {
 
-      alert('Winner: o');
-      $('#play-board li').text('+');
+      alert('Winner: P1');
+      $('#play-board li').text(' ');
       $('#play-board li').removeClass('disable');
       $('#play-board li').removeClass('o');
       $('#play-board li').removeClass('x');
@@ -41,21 +41,21 @@ $(document).ready(function () {
 
     ) {
 
-      alert('Winner: x');
-      $('#play-board li').text('+');
+      alert('Winner: P2');
+      $('#play-board li').text(' ');
       $('#play-board li').removeClass('disable');
       $('#play-board li').removeClass('o');
       $('#play-board li').removeClass('x');
 
     } else if (turns == 9) {
-      alert('Tie Game');
-      $('#play-board li').text('+');
+      alert('Tie Game. Play again');
+      $('#play-board li').text(' ');
       $('#play-board li').removeClass('disable');
       $('#play-board li').removeClass('o');
       $('#play-board li').removeClass('x');
       turns = 0;
     } else if ($(this).hasClass('disable')) {
-      alert('this place is already filled');
+      alert('This place is already filled');
     } else if (turns % 2 == 0) {
       turns++;
       $(this).text(o);
@@ -70,7 +70,7 @@ $(document).ready(function () {
         move3.hasClass('o') && move5.hasClass('o') && move7.hasClass('o')
 
       ) {
-        alert('Winner: o');
+        alert('Winner: P1');
         turns = 0;
       }
     } else {
@@ -87,21 +87,17 @@ $(document).ready(function () {
         move3.hasClass('x') && move5.hasClass('x') && move7.hasClass('x')
 
       ) {
-        alert('Winner: x');
+        alert('Winner: P2');
         turns = 0;
-
       }
     }
   });
 
   $('#replay').on('click', function () {
-    $('#play-board li').text('+');
+    $('#play-board li').text(' ');
     $('#play-board li').removeClass('disable');
     $('#play-board li').removeClass('o');
     $('#play-board li').removeClass('x');
     turns = 0;
-
   });
-
-
 });
