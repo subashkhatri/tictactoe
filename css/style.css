@@ -35,12 +35,33 @@ h1 {
   list-style: none;
   text-align: center;
   border-radius: 5px;
+
 }
 
 #play-board li:hover {
   cursor: pointer;
   background: rgb(238, 216, 216);
 }
+
+.o {
+  color: rgb(117, 24, 136) !important;
+}
+
+.o-shadow {
+  color: rgb(218, 111, 240) !important;
+
+}
+
+.x {
+  color: red !important;
+}
+
+.x-shadow {
+  
+  color: rgb(250, 136, 136) !important;
+
+}
+
 
 #replay {
   border: 0;
@@ -56,14 +77,7 @@ h1 {
   background: rgb(44, 3, 3);
 }
 
-.o {
-  color: rgb(117, 24, 136) !important;
 
-}
-
-.x {
-  color: red !important;
-}
 
 footer {
   display: block;
