@@ -40,27 +40,9 @@ h1 {
 
 #play-board li:hover {
   cursor: pointer;
-  background: rgb(238, 216, 216);
+  /* background: rgb(238, 216, 216); */
 }
 
-.o {
-  color: rgb(117, 24, 136) !important;
-}
-
-.o-shadow {
-  color: rgb(218, 111, 240) !important;
-
-}
-
-.x {
-  color: red !important;
-}
-
-.x-shadow {
-  
-  color: rgb(250, 136, 136) !important;
-
-}
 
 
 #replay {
@@ -77,10 +59,28 @@ h1 {
   background: rgb(44, 3, 3);
 }
 
+.o {
+  color: rgb(117, 24, 136) !important;
+}
 
+.x {
+  color: red !important;
+}
 
 footer {
   display: block;
   text-align: center;
   padding-top: 20px;
+}
+
+.omark {
+  background-image: url("../images/o.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.xmark {
+  background-image: url("../images/x.png");
+  background-position: center;
+  background-repeat: no-repeat;
 }

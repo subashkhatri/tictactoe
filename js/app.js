@@ -2,6 +2,7 @@ $(document).ready(function () {
   var x = 'x';
   var o = 'o';
   var turns = 0;
+  var mark = 'O';
 
   var move1 = $('#move1');
   var move2 = $('#move2');
@@ -14,17 +15,23 @@ $(document).ready(function () {
   var move9 = $('#move9');
 
   $('#play-board li').mouseover(function () {
-    if ($('#play-board li').hasClass('x-shadow')) {
-      $(this).removeClass('x-shadow');
-      $(this).addClass('o-shadow');
+    if (mark == 'O') {
+      $('.mark').removeClass('omark');
+      $('.mark').removeClass('xmark');
+      if (!$(this).hasClass('disable')) {
+        $(this).addClass('omark');
+      }
     } else {
-      $(this).removeClass('o-shadow');
-      $(this).addClass('x-shadow');
+      $('.mark').removeClass('omark');
+      $('.mark').removeClass('xmark');
+      if (!$(this).hasClass('disable')) {
+        $(this).addClass('xmark');
+      }
     }
   });
   $('#play-board li').mouseout(function () {
-    $(this).removeClass('o-shadow');
-    $(this).removeClass('x-shadow');
+    $('.mark').removeClass('omark');
+    $('.mark').removeClass('xmark');
   });
 
   $('#play-board li').on('click', function () {
@@ -69,6 +76,9 @@ $(document).ready(function () {
       alert('This place is already filled');
     } else if (turns % 2 == 0) {
       turns++;
+      mark = 'X';
+      $('.mark').removeClass('omark');
+      $('.mark').removeClass('xmark');
       $(this).text(o);
       $(this).addClass('disable o');
 
@@ -87,6 +97,9 @@ $(document).ready(function () {
       }
     } else {
       turns++;
+      mark = 'O';
+      $('.mark').removeClass('omark');
+      $('.mark').removeClass('xmark');
 
       $(this).text(x);
       $(this).addClass('disable x');
