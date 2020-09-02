@@ -33,6 +33,7 @@ $(document).ready(function () {
     $('.mark').removeClass('omark');
     $('.mark').removeClass('xmark');
   });
+
   function checkWinner(item) {
     return (
       (move1.hasClass(item) && move2.hasClass(item) && move3.hasClass(item)) ||
@@ -45,26 +46,23 @@ $(document).ready(function () {
       (move3.hasClass(item) && move5.hasClass(item) && move7.hasClass(item))
     );
   }
-
+  function resetBoard() {
+    $('#play-board li').text(' ');
+    $('#play-board li').removeClass('disable');
+    $('#play-board li').removeClass('o');
+    $('#play-board li').removeClass('x');
+  }
   $('#play-board li').on('click', function () {
     if (checkWinner('o')) {
       alert('Winner: P1');
-      $('#play-board li').text(' ');
-      $('#play-board li').removeClass('disable');
-      $('#play-board li').removeClass('o');
-      $('#play-board li').removeClass('x');
+      resetBoard();
+
     } else if (checkWinner('x')) {
       alert('Winner: P2');
-      $('#play-board li').text(' ');
-      $('#play-board li').removeClass('disable');
-      $('#play-board li').removeClass('o');
-      $('#play-board li').removeClass('x');
+      resetBoard();
     } else if (turns == 9) {
       alert('Tie Game. Play again');
-      $('#play-board li').text(' ');
-      $('#play-board li').removeClass('disable');
-      $('#play-board li').removeClass('o');
-      $('#play-board li').removeClass('x');
+      resetBoard();
       turns = 0;
     } else if ($(this).hasClass('disable')) {
       alert('This place is already filled');
@@ -96,10 +94,7 @@ $(document).ready(function () {
   });
 
   $('#replay').on('click', function () {
-    $('#play-board li').text(' ');
-    $('#play-board li').removeClass('disable');
-    $('#play-board li').removeClass('o');
-    $('#play-board li').removeClass('x');
+    resetBoard();
     turns = 0;
   });
 });
