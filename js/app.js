@@ -33,33 +33,27 @@ $(document).ready(function () {
     $('.mark').removeClass('omark');
     $('.mark').removeClass('xmark');
   });
+  function checkWinner(item) {
+    return (
+      (move1.hasClass(item) && move2.hasClass(item) && move3.hasClass(item)) ||
+      (move4.hasClass(item) && move5.hasClass(item) && move6.hasClass(item)) ||
+      (move7.hasClass(item) && move8.hasClass(item) && move9.hasClass(item)) ||
+      (move1.hasClass(item) && move4.hasClass(item) && move7.hasClass(item)) ||
+      (move2.hasClass(item) && move5.hasClass(item) && move8.hasClass(item)) ||
+      (move3.hasClass(item) && move6.hasClass(item) && move9.hasClass(item)) ||
+      (move1.hasClass(item) && move5.hasClass(item) && move9.hasClass(item)) ||
+      (move3.hasClass(item) && move5.hasClass(item) && move7.hasClass(item))
+    );
+  }
 
   $('#play-board li').on('click', function () {
-    if (
-      (move1.hasClass('o') && move2.hasClass('o') && move3.hasClass('o')) ||
-      (move4.hasClass('o') && move5.hasClass('o') && move6.hasClass('o')) ||
-      (move7.hasClass('o') && move8.hasClass('o') && move9.hasClass('o')) ||
-      (move1.hasClass('o') && move4.hasClass('o') && move7.hasClass('o')) ||
-      (move2.hasClass('o') && move5.hasClass('o') && move8.hasClass('o')) ||
-      (move3.hasClass('o') && move6.hasClass('o') && move9.hasClass('o')) ||
-      (move1.hasClass('o') && move5.hasClass('o') && move9.hasClass('o')) ||
-      (move3.hasClass('o') && move5.hasClass('o') && move7.hasClass('o'))
-    ) {
+    if (checkWinner('o')) {
       alert('Winner: P1');
       $('#play-board li').text(' ');
       $('#play-board li').removeClass('disable');
       $('#play-board li').removeClass('o');
       $('#play-board li').removeClass('x');
-    } else if (
-      (move1.hasClass('x') && move2.hasClass('x') && move3.hasClass('x')) ||
-      (move4.hasClass('x') && move5.hasClass('x') && move6.hasClass('x')) ||
-      (move7.hasClass('x') && move8.hasClass('x') && move9.hasClass('x')) ||
-      (move1.hasClass('x') && move4.hasClass('x') && move7.hasClass('x')) ||
-      (move2.hasClass('x') && move5.hasClass('x') && move8.hasClass('x')) ||
-      (move3.hasClass('x') && move6.hasClass('x') && move9.hasClass('x')) ||
-      (move1.hasClass('x') && move5.hasClass('x') && move9.hasClass('x')) ||
-      (move3.hasClass('x') && move5.hasClass('x') && move7.hasClass('x'))
-    ) {
+    } else if (checkWinner('x')) {
       alert('Winner: P2');
       $('#play-board li').text(' ');
       $('#play-board li').removeClass('disable');
@@ -82,16 +76,7 @@ $(document).ready(function () {
       $(this).text(o);
       $(this).addClass('disable o');
 
-      if (
-        (move1.hasClass('o') && move2.hasClass('o') && move3.hasClass('o')) ||
-        (move4.hasClass('o') && move5.hasClass('o') && move6.hasClass('o')) ||
-        (move7.hasClass('o') && move8.hasClass('o') && move9.hasClass('o')) ||
-        (move1.hasClass('o') && move4.hasClass('o') && move7.hasClass('o')) ||
-        (move2.hasClass('o') && move5.hasClass('o') && move8.hasClass('o')) ||
-        (move3.hasClass('o') && move6.hasClass('o') && move9.hasClass('o')) ||
-        (move1.hasClass('o') && move5.hasClass('o') && move9.hasClass('o')) ||
-        (move3.hasClass('o') && move5.hasClass('o') && move7.hasClass('o'))
-      ) {
+      if (checkWinner('o')) {
         alert('Winner: P1');
         turns = 0;
       }
@@ -103,16 +88,7 @@ $(document).ready(function () {
 
       $(this).text(x);
       $(this).addClass('disable x');
-      if (
-        (move1.hasClass('x') && move2.hasClass('x') && move3.hasClass('x')) ||
-        (move4.hasClass('x') && move5.hasClass('x') && move6.hasClass('x')) ||
-        (move7.hasClass('x') && move8.hasClass('x') && move9.hasClass('x')) ||
-        (move1.hasClass('x') && move4.hasClass('x') && move7.hasClass('x')) ||
-        (move2.hasClass('x') && move5.hasClass('x') && move8.hasClass('x')) ||
-        (move3.hasClass('x') && move6.hasClass('x') && move9.hasClass('x')) ||
-        (move1.hasClass('x') && move5.hasClass('x') && move9.hasClass('x')) ||
-        (move3.hasClass('x') && move5.hasClass('x') && move7.hasClass('x'))
-      ) {
+      if (checkWinner('x')) {
         alert('Winner: P2');
         turns = 0;
       }
