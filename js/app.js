@@ -46,6 +46,7 @@ $(document).ready(function () {
       (move3.hasClass(item) && move5.hasClass(item) && move7.hasClass(item))
     );
   }
+
   function resetBoard() {
     $('#play-board li').text(' ');
     $('#play-board li').removeClass('disable');
@@ -56,7 +57,6 @@ $(document).ready(function () {
     if (checkWinner('o')) {
       alert('Winner: P1');
       resetBoard();
-
     } else if (checkWinner('x')) {
       alert('Winner: P2');
       resetBoard();
