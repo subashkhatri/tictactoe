@@ -1,26 +1,103 @@
-var winnners = [];
-var player1Selections = [];
-var player2Selections = [];
+var winners = new Array();
+var player1Selections = new Array();
+var player2Selections = new Array();
+var timer;
 var numberOfPlayers = 2;
 var currentPlayer = 0;
 var move = 0;
-var points1 = 0; // points for player 1
-var points2 = 0; // points for player 2
-var size = 3;
+var points1 = 0;
+var points2 = 0;
+
+function getSize() {
+  var x = prompt("Please enter value over 3");
+  var size = parseInt(x);
+  return size;
+}
+var size = getSize();
 
 function drawBoard() {
-  var Parent = document.getElementById('play-board');
+  var Parent = document.getElementById("game");
+  var counter = 1;
+  while (Parent.hasChildNodes()) {
+    Parent.removeChild(Parent.firstChild);
+  }
+  for (s = 0; s < size; s++) {
+    var row = document.createElement("tr");
+    for (r = 0; r < size; r++) {
+      var col = document.createElement("td");
+      col.id = counter;
+      var handler = function (e) {
+        if (currentPlayer == 0) {
+          this.innerHTML = "X";
+          player1Selections.push(parseInt(this.id));
+          player1Selections.sort(function (a, b) {
+            return a - b
+          });
+          d('player1').classList.remove('selected');
+          d('player2').classList.add('selected');
+        } else {
+          this.innerHTML = "O";
+          player2Selections.push(parseInt(this.id));
+          player2Selections.sort(function (a, b) {
+            return a - b
+          });
+          d('player1').classList.add('selected');
+          d('player2').classList.remove('selected');
+        }
+        if (checkWinner()) {
+          if (currentPlayer == 0)
+            points1++;
+          else
+            points2++;
+          document.getElementById("player1").innerHTML = points1;
+          document.getElementById("player2").innerHTML = points2;
+          reset();
+          drawBoard();
+        } else if (player2Selections.length + player1Selections.length == (size * size)) {
+          reset();
+          drawBoard();
+        } else {
+          if (currentPlayer == 0)
+            currentPlayer = 1;
+          else
+            currentPlayer = 0;
+          this.removeEventListener('click', arguments.callee);
+        }
+      };
+      col.addEventListener('click', handler);
+      row.appendChild(col);
+      counter++;
+    }
+    Parent.appendChild(row);
+  }
+  loadAnswers();
+  console.log(winners);
 }
+
 function d(id) {
-  var element = document.getElementById(id);
-  return element;
+  var el = document.getElementById(id);
+  return el;
 }
-function reset() {}
-function loadAnswers() {}
 
-function checkWinner() {}
+function reset() {
+ 
+}
 
+function loadAnswers() {
+  
+
+}
+
+function checkWinner() {
+
+  
+}
 window.addEventListener('load', drawBoard);
+/*$(document).ready(function () {
+    $(document).on('click','#submit',function () {
+        size=document.getElementById('size').value;
+    })
+});*/
 
 // $(document).ready(function () {
 //   var x = 'x';
