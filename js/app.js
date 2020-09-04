@@ -4,10 +4,7 @@ var player2Selections = new Array();
 
 var numberOfPlayers = 2;
 var currentPlayer = 0;
-var move = 0;
-var tableData = 'X';
-// var points1 = 0;
-// var points2 = 0;
+var mark = '';
 
 function getSize() {
   var x = prompt('Please enter value over 3');
@@ -16,27 +13,6 @@ function getSize() {
   return size;
 }
 var size = getSize();
-
-// $('#play-board td').mouseover(function () {
-//   if (tableData == 'O') {
-//     $('td').removeClass('omark');
-//     $('td').removeClass('xmark');
-//     if (!$(this).hasClass('disable')) {
-//       $(this).addClass('omark');
-//     }
-//   } else {
-//     $('td').removeClass('omark');
-//     $('td').removeClass('xmark');
-//     if (!$(this).hasClass('disable')) {
-//       $(this).addClass('xmark');
-//     }
-//   }
-// });
-// $('#play-board li').mouseout(function () {
-//   $('td').removeClass('omark');
-//   $('td').removeClass('xmark');
-// });
-
 function drawBoard() {
   var Parent = document.getElementById('play-board');
   var counter = 1;
@@ -52,6 +28,7 @@ function drawBoard() {
       var handler = function (e) {
         if (currentPlayer == 0) {
           this.innerHTML = 'X';
+          mark = 'o';
           // document.getElementById('player1').style.color = 'red';
 
           player1Selections.push(parseInt(this.id));
@@ -59,23 +36,22 @@ function drawBoard() {
             return a - b; // sorting in accending order
           });
           this.classList.add('x');
+          this.classList.add('disable');
+          $('.x').removeClass('xmark');
           d('player1').classList.remove('selected'); //removeing the id of player which is selected
           d('player2').classList.add('selected'); //adding the id of selected next player
-          // tableData = 'O';
-          // $('td').removeClass('omark');
-          // $('td').removeClass('xmark');
         } else {
           this.innerHTML = 'O';
+          mark = 'x';
           player2Selections.push(parseInt(this.id));
           player2Selections.sort(function (a, b) {
             return a - b; // sorting in accending order
           });
           this.classList.add('o');
+          this.classList.add('disable');
+          $('.o').removeClass('omark');
           d('player1').classList.add('selected');
           d('player2').classList.remove('selected');
-          // tableData = 'X';
-          // $('td').removeClass('omark');
-          // $('td').removeClass('xmark');
         }
         // check Winner and add the points
         if (checkWinner()) {
@@ -110,6 +86,7 @@ function drawBoard() {
     Parent.appendChild(row);
   }
   loadAnswers();
+  hover();
   console.log(winners);
 }
 
@@ -149,8 +126,6 @@ function loadAnswers() {
     }
     winners.push(arr2);
     colval++;
-    /* }
-     i++;*/
   }
   var arr3 = [];
   for (l = 0; l < size; l++) {
@@ -199,6 +174,29 @@ function checkWinner() {
     }
   }
   return win;
+}
+function hover() {
+  $('table td').mouseover(function () {
+    console.log(mark);
+    if (mark == 'o') {
+      $('.x').removeClass('omark');
+      $('.o').removeClass('xmark');
+      if (!$(this).hasClass('disable')) {
+        $(this).addClass('omark');
+      }
+    } else {
+      $('.x').removeClass('omark');
+      $('.o').removeClass('xmark');
+      if (!$(this).hasClass('disable')) {
+        $(this).addClass('xmark');
+      }
+    }
+  });
+  $('table td').mouseout(function () {
+    console.log('out');
+    $('table td').removeClass('omark');
+    $('table td').removeClass('xmark');
+  });
 }
 
 window.addEventListener('load', drawBoard);
