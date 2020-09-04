@@ -5,20 +5,42 @@ var player2Selections = new Array();
 var numberOfPlayers = 2;
 var currentPlayer = 0;
 var move = 0;
-var mark = 'X';
+var tableData = 'X';
 // var points1 = 0;
 // var points2 = 0;
 
 function getSize() {
   var x = prompt('Please enter value over 3');
   var size = parseInt(x);
+
   return size;
 }
 var size = getSize();
 
+// $('#play-board td').mouseover(function () {
+//   if (tableData == 'O') {
+//     $('td').removeClass('omark');
+//     $('td').removeClass('xmark');
+//     if (!$(this).hasClass('disable')) {
+//       $(this).addClass('omark');
+//     }
+//   } else {
+//     $('td').removeClass('omark');
+//     $('td').removeClass('xmark');
+//     if (!$(this).hasClass('disable')) {
+//       $(this).addClass('xmark');
+//     }
+//   }
+// });
+// $('#play-board li').mouseout(function () {
+//   $('td').removeClass('omark');
+//   $('td').removeClass('xmark');
+// });
+
 function drawBoard() {
   var Parent = document.getElementById('play-board');
   var counter = 1;
+
   while (Parent.hasChildNodes()) {
     Parent.removeChild(Parent.firstChild);
   }
@@ -30,21 +52,30 @@ function drawBoard() {
       var handler = function (e) {
         if (currentPlayer == 0) {
           this.innerHTML = 'X';
+          // document.getElementById('player1').style.color = 'red';
+
           player1Selections.push(parseInt(this.id));
           player1Selections.sort(function (a, b) {
             return a - b; // sorting in accending order
           });
+          this.classList.add('x');
           d('player1').classList.remove('selected'); //removeing the id of player which is selected
           d('player2').classList.add('selected'); //adding the id of selected next player
-
+          // tableData = 'O';
+          // $('td').removeClass('omark');
+          // $('td').removeClass('xmark');
         } else {
           this.innerHTML = 'O';
           player2Selections.push(parseInt(this.id));
           player2Selections.sort(function (a, b) {
             return a - b; // sorting in accending order
           });
+          this.classList.add('o');
           d('player1').classList.add('selected');
           d('player2').classList.remove('selected');
+          // tableData = 'X';
+          // $('td').removeClass('omark');
+          // $('td').removeClass('xmark');
         }
         // check Winner and add the points
         if (checkWinner()) {
@@ -64,6 +95,7 @@ function drawBoard() {
           drawBoard();
         } else {
           if (currentPlayer == 0) {
+            //pointer code
             currentPlayer = 1;
           } else {
             currentPlayer = 0;
@@ -100,8 +132,6 @@ function loadAnswers() {
   var colval = 1;
   var diagval = 1;
   for (j = 0; j < size; j++) {
-
-
     //for pushing rows into winners array
     var arr = [];
     for (i = 0; i < size; i++) {
@@ -194,25 +224,25 @@ window.addEventListener('load', drawBoard);
 //   var move8 = $('#move8');
 //   var move9 = $('#move9');
 
-//   $('#play-board li').mouseover(function () {
-//     if (mark == 'O') {
-//       $('.mark').removeClass('omark');
-//       $('.mark').removeClass('xmark');
-//       if (!$(this).hasClass('disable')) {
-//         $(this).addClass('omark');
-//       }
-//     } else {
-//       $('.mark').removeClass('omark');
-//       $('.mark').removeClass('xmark');
-//       if (!$(this).hasClass('disable')) {
-//         $(this).addClass('xmark');
-//       }
-//     }
-//   });
-//   $('#play-board li').mouseout(function () {
+// $('#play-board li').mouseover(function () {
+//   if (mark == 'O') {
 //     $('.mark').removeClass('omark');
 //     $('.mark').removeClass('xmark');
-//   });
+//     if (!$(this).hasClass('disable')) {
+//       $(this).addClass('omark');
+//     }
+//   } else {
+//     $('.mark').removeClass('omark');
+//     $('.mark').removeClass('xmark');
+//     if (!$(this).hasClass('disable')) {
+//       $(this).addClass('xmark');
+//     }
+//   }
+// });
+// $('#play-board li').mouseout(function () {
+//   $('.mark').removeClass('omark');
+//   $('.mark').removeClass('xmark');
+// });
 
 //   function checkWinner(item) {
 //     return (
