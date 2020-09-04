@@ -1,7 +1,7 @@
 var winners = new Array();
 var player1Selections = new Array();
 var player2Selections = new Array();
-var timer;
+
 var numberOfPlayers = 2;
 var currentPlayer = 0;
 var move = 0;
@@ -9,60 +9,42 @@ var points1 = 0;
 var points2 = 0;
 
 function getSize() {
-  var x = prompt("Please enter value over 3");
+  var x = prompt('Please enter value over 3');
   var size = parseInt(x);
   return size;
 }
 var size = getSize();
 
 function drawBoard() {
-  var Parent = document.getElementById("game");
+  var Parent = document.getElementById('game');
   var counter = 1;
   while (Parent.hasChildNodes()) {
     Parent.removeChild(Parent.firstChild);
   }
   for (s = 0; s < size; s++) {
-    var row = document.createElement("tr");
+    var row = document.createElement('tr');
     for (r = 0; r < size; r++) {
-      var col = document.createElement("td");
-      col.id = counter;
+      var col = document.createElement('td');
+      col.id = counter; // setting col.id = 1;
       var handler = function (e) {
         if (currentPlayer == 0) {
-          this.innerHTML = "X";
+          this.innerHTML = 'X';
           player1Selections.push(parseInt(this.id));
           player1Selections.sort(function (a, b) {
-            return a - b
+            return a - b; // sorting in accending order
           });
-          d('player1').classList.remove('selected');
-          d('player2').classList.add('selected');
+          d('player1').classList.remove('selected'); //removeing the id of player which is selected
+          d('player2').classList.add('selected'); //adding the id of selected next player
         } else {
-          this.innerHTML = "O";
+          this.innerHTML = 'O';
           player2Selections.push(parseInt(this.id));
           player2Selections.sort(function (a, b) {
-            return a - b
+            return a - b; // sorting in accending order
           });
           d('player1').classList.add('selected');
           d('player2').classList.remove('selected');
         }
-        if (checkWinner()) {
-          if (currentPlayer == 0)
-            points1++;
-          else
-            points2++;
-          document.getElementById("player1").innerHTML = points1;
-          document.getElementById("player2").innerHTML = points2;
-          reset();
-          drawBoard();
-        } else if (player2Selections.length + player1Selections.length == (size * size)) {
-          reset();
-          drawBoard();
-        } else {
-          if (currentPlayer == 0)
-            currentPlayer = 1;
-          else
-            currentPlayer = 0;
-          this.removeEventListener('click', arguments.callee);
-        }
+        // check Winner and add the points
       };
       col.addEventListener('click', handler);
       row.appendChild(col);
@@ -70,8 +52,6 @@ function drawBoard() {
     }
     Parent.appendChild(row);
   }
-  loadAnswers();
-  console.log(winners);
 }
 
 function d(id) {
@@ -80,17 +60,47 @@ function d(id) {
 }
 
 function reset() {
- 
+  currentPlayer = 0;
+  player1Selections = new Array();
+  player2Selections = new Array();
+  d('player1').classList.add('selected'); // selecting player 1 by passing the the ID
+  d('player2').classList.remove('selected');
 }
 
-function loadAnswers() {
-  
-
-}
+function loadAnswers() {}
 
 function checkWinner() {
-
-  
+  var win = false;
+  var playerSelections = new Array();
+  if (currentPlayer == 0) {
+    playerSelections = player1Selections;
+  } else {
+    playerSelections = player2Selections;
+  }
+  if (playerSelections.length >= size) {
+    for (i = 0; i < winners.length; i++) {
+      var sets = winners[i];
+      var setFound = true;
+      for (r = 0; r < sets.length; r++) {
+        var found = false;
+        for (s = 0; s < playerSelections.length; s++) {
+          if (sets[r] == playerSelections[s]) {
+            found = true;
+            break;
+          }
+        }
+        if (found == false) {
+          setFound = false;
+          break;
+        }
+      }
+      if (setFound == true) {
+        win = true;
+        break;
+      }
+    }
+  }
+  return win;
 }
 window.addEventListener('load', drawBoard);
 /*$(document).ready(function () {
