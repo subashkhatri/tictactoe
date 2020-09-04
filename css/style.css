@@ -1,6 +1,16 @@
 body {
   margin: 0px;
   padding: 0px;
+  background: #4fd9fc;
+  color: rgb(223, 144, 41);
+  font-family: 'Times New Roman', Times, serif;
+
+}
+
+#container {
+  width: auto;
+  overflow: auto;
+  margin: 40px auto;
   background-color: rgb(57, 95, 92);
   margin-right: 50px;
   margin-left: 50px;
@@ -8,54 +18,65 @@ body {
   border-radius: 10px;
 }
 
-.game td {
+/* body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(57, 95, 92);
+  margin-right: 50px;
+  margin-left: 50px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+} */
+
+.play-board td {
+  background-color: rgb(46, 138, 192);
   width: 100px;
   height: 100px;
-  border: solid 5px rgb(51, 15, 15);;
+  border: solid 5px rgb(51, 15, 15);
   text-align: center;
   font-size: 40pt;
   border-radius: 10px;
   box-sizing: border-box;
 }
 
-.game td:hover {
-  background-color: rgb(46, 138, 192);
+.play-board td:hover {
+  background-color: rgb(41, 90, 223);
   cursor: pointer;
 }
 
-.game {
+.play-board {
+  margin-top: 25px;
   background: #efefef;
-  border: solid 10px #333;
+  border: solid 10px rgb(71, 5, 5);
 }
 
-.game .game-title {
+.play-board .play-board-title {
   /* background: #222; */
-  color: rgb(223, 144, 41);
-  padding: 10px;
   text-align: center;
+  color: rgb(223, 144, 41);
   font-size: 30pt;
+  padding: 10px;
 }
 
-.game .player {
+.play-board .player {
   float: left;
   text-align: center;
   width: 25%;
 }
 
-.game .player .selected {
-  border-bottom: solid 4px rgb(204, 177, 27);
-}
-
 .tictactoe-board {
+
   text-align: center;
   margin: 0 auto;
   width: 50%;
-  padding-top: 20px;
 }
 
+
 .tictactoe-board table {
+  height: auto;
+  width: auto;
   float: left;
-  width: 50%;
+  border-radius: 5px;
 }
 
 .tictactoe-board-score1 {
@@ -72,6 +93,13 @@ body {
   clear: both;
 }
 
+/* .o {
+  color: rgb(117, 24, 136) !important;
+}
+
+.x {
+  color: red !important;
+} */
 
 /* body {
   margin: 0px;

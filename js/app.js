@@ -5,8 +5,9 @@ var player2Selections = new Array();
 var numberOfPlayers = 2;
 var currentPlayer = 0;
 var move = 0;
-var points1 = 0;
-var points2 = 0;
+var mark = 'X';
+// var points1 = 0;
+// var points2 = 0;
 
 function getSize() {
   var x = prompt('Please enter value over 3');
@@ -16,7 +17,7 @@ function getSize() {
 var size = getSize();
 
 function drawBoard() {
-  var Parent = document.getElementById('game');
+  var Parent = document.getElementById('play-board');
   var counter = 1;
   while (Parent.hasChildNodes()) {
     Parent.removeChild(Parent.firstChild);
@@ -35,6 +36,7 @@ function drawBoard() {
           });
           d('player1').classList.remove('selected'); //removeing the id of player which is selected
           d('player2').classList.add('selected'); //adding the id of selected next player
+
         } else {
           this.innerHTML = 'O';
           player2Selections.push(parseInt(this.id));
@@ -47,12 +49,10 @@ function drawBoard() {
         // check Winner and add the points
         if (checkWinner()) {
           if (currentPlayer == 0) {
-            points1++;
+            alert('X wins');
           } else {
-            points2++;
+            alert('0 wins');
           }
-          document.getElementById('player1').innerHTML = points1;
-          document.getElementById('player2').innerHTML = points2;
           reset();
           drawBoard();
         } else if (
@@ -77,6 +77,8 @@ function drawBoard() {
     }
     Parent.appendChild(row);
   }
+  loadAnswers();
+  console.log(winners);
 }
 
 function d(id) {
@@ -92,7 +94,48 @@ function reset() {
   d('player2').classList.remove('selected');
 }
 
-function loadAnswers() {}
+function loadAnswers() {
+  var i = 0;
+  var regularcount = 1;
+  var colval = 1;
+  var diagval = 1;
+  for (j = 0; j < size; j++) {
+
+
+    //for pushing rows into winners array
+    var arr = [];
+    for (i = 0; i < size; i++) {
+      arr.push(regularcount);
+      regularcount++;
+    }
+    console.log(arr);
+    winners.push(arr);
+    //for pushing columns into winners array
+    var arr2 = [];
+    var tempcolval = colval;
+    for (i = 0; i < size; i++) {
+      arr2.push(tempcolval);
+      tempcolval = tempcolval + size;
+    }
+    winners.push(arr2);
+    colval++;
+    /* }
+     i++;*/
+  }
+  var arr3 = [];
+  for (l = 0; l < size; l++) {
+    arr3.push(diagval);
+    diagval += size + 1;
+  }
+  winners.push(arr3);
+  diagval = size;
+  var arr4 = [];
+  for (l = 0; l < size; l++) {
+    arr4.push(diagval);
+    diagval += size - 1;
+  }
+  winners.push(arr4);
+}
 
 function checkWinner() {
   var win = false;
@@ -127,6 +170,7 @@ function checkWinner() {
   }
   return win;
 }
+
 window.addEventListener('load', drawBoard);
 /*$(document).ready(function () {
     $(document).on('click','#submit',function () {
