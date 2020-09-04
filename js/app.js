@@ -45,6 +45,31 @@ function drawBoard() {
           d('player2').classList.remove('selected');
         }
         // check Winner and add the points
+        if (checkWinner()) {
+          if (currentPlayer == 0) {
+            points1++;
+          } else {
+            points2++;
+          }
+          document.getElementById('player1').innerHTML = points1;
+          document.getElementById('player2').innerHTML = points2;
+          reset();
+          drawBoard();
+        } else if (
+          player2Selections.length + player1Selections.length ==
+          size * size
+        ) {
+          alert(' Its a tie');
+          reset();
+          drawBoard();
+        } else {
+          if (currentPlayer == 0) {
+            currentPlayer = 1;
+          } else {
+            currentPlayer = 0;
+          }
+          this.removeEventListener('click', arguments.callee);
+        }
       };
       col.addEventListener('click', handler);
       row.appendChild(col);
