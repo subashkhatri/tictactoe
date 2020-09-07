@@ -1,47 +1,76 @@
 body {
-  margin: 0px;
-  padding: 0px;
   background: #4fd9fc;
   color: rgb(223, 144, 41);
   font-family: 'Times New Roman', Times, serif;
 
 }
 
+h1 {
+  text-align: center;
+  color: rgb(223, 144, 41);
+  ;
+}
+
+.clear-fix {
+  clear: both;
+}
+
 #container {
-  width: auto;
+  width: 350px;
   overflow: auto;
   margin: 40px auto;
   background-color: rgb(57, 95, 92);
-  margin-right: 50px;
-  margin-left: 50px;
   padding-bottom: 40px;
   border-radius: 10px;
 }
 
-
-
-.play-board td {
-  background-color: rgb(223, 144, 41);
-  width: 100px;
-  height: 100px;
-  border: solid 3px rgb(51, 15, 15);
+#play-board li {
+  float: left;
+  margin: 10px;
+  height: 70px;
+  width: 70px;
+  font-size: 55px;
+  background-color: rgb(165, 158, 65);
+  color: #000;
+  list-style: none;
   text-align: center;
-  font-size: 40pt;
-  border-radius: 3px;
-  box-sizing: border-box;
+  border-radius: 5px;
+
 }
 
-.play-board td:hover {
-  /* background-color: rgb(41, 90, 223); */
+#play-board li:hover {
   cursor: pointer;
+  /* background: rgb(238, 216, 216); */
 }
 
-.play-board td.x {
+
+
+#replay {
+  border: 0;
+  background: rgb(148, 43, 43);
+  color: #fff;
+  width: 70%;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#replay:hover {
+  cursor: pointer;
+  background: rgb(44, 3, 3);
+}
+
+.o {
+  color: rgb(117, 24, 136) !important;
+}
+
+.x {
   color: red !important;
 }
 
-.play-board td.o {
-  color: rgb(117, 24, 136) !important;
+footer {
+  display: block;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .omark {
@@ -54,53 +83,4 @@ body {
   background-image: url("../images/x.png");
   background-position: center;
   background-repeat: no-repeat;
-}
-
-.play-board {
-  margin-top: 25px;
-  background: #efefef;
-  border: solid 10px rgb(71, 5, 5);
-}
-
-.play-board .play-board-title {
-  /* background: #222; */
-  text-align: center;
-  color: rgb(223, 144, 41);
-  font-size: 30pt;
-  padding: 10px;
-}
-
-.play-board .player {
-  float: left;
-  text-align: center;
-  width: 25%;
-}
-
-.tictactoe-board {
-
-  text-align: center;
-  margin: 0 auto;
-  width: 50%;
-}
-
-
-.tictactoe-board table {
-  height: auto;
-  width: auto;
-  float: left;
-  border-radius: 5px;
-}
-
-.tictactoe-board-score1 {
-  float: left;
-  width: 20%;
-}
-
-.tictactoe-board-score2 {
-  float: left;
-  width: 20%;
-}
-
-.clear {
-  clear: both;
 }
