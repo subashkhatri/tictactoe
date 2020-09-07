@@ -13,6 +13,7 @@ function getSize() {
   return size;
 }
 var size = getSize();
+
 function drawBoard() {
   var Parent = document.getElementById('play-board');
   var counter = 1;
@@ -175,6 +176,7 @@ function checkWinner() {
   }
   return win;
 }
+// hover function for displaying the turn of player1 and player 2
 function hover() {
   $('table td').mouseover(function () {
     console.log(mark);
