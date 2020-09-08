@@ -1,149 +1,99 @@
 var winners = new Array();
 var player1Selections = new Array();
 var player2Selections = new Array();
+var parent;
 
 var numberOfPlayers = 2;
 var currentPlayer = 0;
 var mark = '';
 
-function getSize() {
+function getBoardSize() {
   var x = prompt('Please enter value over 3');
-  var size = parseInt(x);
+  var boardSize = parseInt(x);
 
-  return size;
+  return boardSize;
 }
-var size = getSize();
+var boardSize = getBoardSize();
 
+
+
+// Function for drawing a Board
 function drawBoard() {
-  var Parent = document.getElementById('play-board');
+  parent = document.getElementById('play-board');
   var counter = 1;
 
-  while (Parent.hasChildNodes()) {
-    Parent.removeChild(Parent.firstChild);
-  }
-  for (s = 0; s < size; s++) {
-    var row = document.createElement('tr');
-    for (r = 0; r < size; r++) {
-      var col = document.createElement('td');
-      col.id = counter; // setting col.id = 1;
-      var handler = function (e) {
-        if (currentPlayer == 0) {
-          this.innerHTML = 'X';
-          mark = 'o';
-          // document.getElementById('player1').style.color = 'red';
+  //while creates a loop with given boardSize for eg = 3 and until we reload the window the board boardSize of the game will be 3 * 3 
 
-          player1Selections.push(parseInt(this.id));
-          player1Selections.sort(function (a, b) {
-            return a - b; // sorting in accending order
-          });
-          this.classList.add('x');
-          this.classList.add('disable');
-          $('.x').removeClass('xmark');
-          d('player1').classList.remove('selected'); //removeing the id of player which is selected
-          d('player2').classList.add('selected'); //adding the id of selected next player
-        } else {
-          this.innerHTML = 'O';
-          mark = 'x';
-          player2Selections.push(parseInt(this.id));
-          player2Selections.sort(function (a, b) {
-            return a - b; // sorting in accending order
-          });
-          this.classList.add('o');
-          this.classList.add('disable');
-          $('.o').removeClass('omark');
-          d('player1').classList.add('selected');
-          d('player2').classList.remove('selected');
-        }
-        // check Winner and add the points
-        if (checkWinner()) {
-          if (currentPlayer == 0) {
-            alert('X wins');
-          } else {
-            alert('0 wins');
-          }
-          reset();
-          drawBoard();
-        } else if (
-          player2Selections.length + player1Selections.length ==
-          size * size
-        ) {
-          alert(' Its a tie');
-          reset();
-          drawBoard();
-        } else {
-          if (currentPlayer == 0) {
-            //pointer code
-            currentPlayer = 1;
-          } else {
-            currentPlayer = 0;
-          }
-          this.removeEventListener('click', arguments.callee);
-        }
-      };
-      col.addEventListener('click', handler);
-      row.appendChild(col);
+  while (parent.hasChildNodes()) {
+    parent.removeChild(parent.firstChild);
+  }
+  // creating rows and column 
+  for (size = 0; size < boardSize; size++) {
+    var row = document.createElement('tr');
+    for (r = 0; r < boardSize; r++) {
+      var column = document.createElement('td');
+      column.id = counter; // setting col.id = 1;
+      column.addEventListener('click', setHandler);
+      row.appendChild(column);
       counter++;
     }
-    Parent.appendChild(row);
+    parent.appendChild(row);
+
   }
-  loadAnswers();
-  hover();
+  // calling setWinnerComination function
+  setWinnerCombination();
+  // adding hover effects by colling function set hover effect
+  setHoverEffect();
   console.log(winners);
 }
 
-function d(id) {
-  var el = document.getElementById(id);
-  return el;
-}
-
-function reset() {
-  currentPlayer = 0;
-  player1Selections = new Array();
-  player2Selections = new Array();
-  d('player1').classList.add('selected'); // selecting player 1 by passing the the ID
-  d('player2').classList.remove('selected');
-}
-
-function loadAnswers() {
-  var i = 0;
-  var regularcount = 1;
-  var colval = 1;
-  var diagval = 1;
-  for (j = 0; j < size; j++) {
+// returns array of Winner Combination 
+// (3) [1, 2, 3]0: 1 1: 2 2: 3 length: 3
+// (3) [4, 5, 6]0: 4 1: 5 2: 6 length: 3
+// (3) [7, 8, 9]0: 7 1: 8 2: 9 length: 3
+function setWinnerCombination() {
+  var value_in_row = 1;
+  var value_in_column = 1;
+  var value_in_diagonal = 1;
+  for (j = 0; j < boardSize; j++) {
     //for pushing rows into winners array
-    var arr = [];
-    for (i = 0; i < size; i++) {
-      arr.push(regularcount);
-      regularcount++;
+    var rowIndex = [];
+    //i = rowNum
+    for (i = 0; i < boardSize; i++) {
+      rowIndex.push(value_in_row);
+      value_in_row++;
     }
-    console.log(arr);
-    winners.push(arr);
+    console.log(rowIndex);
+    winners.push(rowIndex);
     //for pushing columns into winners array
-    var arr2 = [];
-    var tempcolval = colval;
-    for (i = 0; i < size; i++) {
-      arr2.push(tempcolval);
-      tempcolval = tempcolval + size;
+    var columnIndex = [];
+    var temp_column_value = value_in_column;
+    //i = colNum
+    for (i = 0; i < boardSize; i++) {
+      columnIndex.push(temp_column_value);
+      temp_column_value += boardSize;
     }
-    winners.push(arr2);
-    colval++;
+    winners.push(columnIndex);
+    value_in_column++;
   }
-  var arr3 = [];
-  for (l = 0; l < size; l++) {
-    arr3.push(diagval);
-    diagval += size + 1;
+  var diagonalIndexOne = [];
+  // l = Digonal Num
+  for (l = 0; l < boardSize; l++) {
+    diagonalIndexOne.push(value_in_diagonal);
+    value_in_diagonal += boardSize + 1;
   }
-  winners.push(arr3);
-  diagval = size;
-  var arr4 = [];
-  for (l = 0; l < size; l++) {
-    arr4.push(diagval);
-    diagval += size - 1;
+  winners.push(diagonalIndexOne);
+  value_in_diagonal = boardSize;
+  var diagonalIndexTwo = [];
+  // l = Digonal Num
+  for (l = 0; l < boardSize; l++) {
+    diagonalIndexTwo.push(value_in_diagonal);
+    value_in_diagonal += boardSize - 1;
   }
-  winners.push(arr4);
+  winners.push(diagonalIndexTwo);
 }
-
-function checkWinner() {
+// retruns if it has winner or not?
+function hasAWinner() {
   var win = false;
   var playerSelections = new Array();
   if (currentPlayer == 0) {
@@ -151,14 +101,15 @@ function checkWinner() {
   } else {
     playerSelections = player2Selections;
   }
-  if (playerSelections.length >= size) {
-    for (i = 0; i < winners.length; i++) {
-      var sets = winners[i];
+  if (playerSelections.length >= boardSize) {
+    // setting winners from its length
+    for (sets = 0; sets < winners.length; sets++) {
+      var setWinner = winners[sets];
       var setFound = true;
-      for (r = 0; r < sets.length; r++) {
+      for (rowIndex = 0; rowIndex < setWinner.length; rowIndex++) {
         var found = false;
         for (s = 0; s < playerSelections.length; s++) {
-          if (sets[r] == playerSelections[s]) {
+          if (setWinner[rowIndex] == playerSelections[s]) {
             found = true;
             break;
           }
@@ -176,19 +127,29 @@ function checkWinner() {
   }
   return win;
 }
+
+
+function reset() {
+  currentPlayer = 0;
+  player1Selections = new Array();
+  player2Selections = new Array();
+  changeClassOfPlayersAfterClick();
+}
+
 // hover function for displaying the turn of player1 and player 2
-function hover() {
+
+function setHoverEffect() {
   $('table td').mouseover(function () {
     console.log(mark);
     if (mark == 'o') {
-      $('.x').removeClass('omark');
-      $('.o').removeClass('xmark');
+      removeAClass();
       if (!$(this).hasClass('disable')) {
+
         $(this).addClass('omark');
       }
     } else {
-      $('.x').removeClass('omark');
-      $('.o').removeClass('xmark');
+      removeAClass();
+
       if (!$(this).hasClass('disable')) {
         $(this).addClass('xmark');
       }
@@ -196,9 +157,93 @@ function hover() {
   });
   $('table td').mouseout(function () {
     console.log('out');
-    $('table td').removeClass('omark');
-    $('table td').removeClass('xmark');
+    removeAClass();
   });
 }
+
+
+
+// function for setting the handler that places each player turn on the board cell
+
+var setHandler = function (e) {
+  if (currentPlayer == 0) {
+    this.innerHTML = 'X';
+    mark = 'o';
+    // document.getElementById('player1').style.color = 'red';
+
+    player1Selections.push(parseInt(this.id));
+    player1Selections.sort(function (a, b) {
+      return a - b; // sorting in accending order
+    });
+    this.classList.add('x');
+    this.classList.add('disable');
+    $('.x').removeClass('xmark');
+
+    changeClassOfPlayersAfterClick();
+
+    // d('player1').classList.remove('selected'); //removeing the id of player which is selected
+    // d('player2').classList.add('selected'); //adding the id of selected next player
+  } else {
+    this.innerHTML = 'O';
+    mark = 'x';
+    player2Selections.push(parseInt(this.id));
+    player2Selections.sort(function (a, b) {
+      return a - b; // sorting in accending order
+    });
+    this.classList.add('o');
+    this.classList.add('disable');
+    $('.o').removeClass('omark');
+    changeClassOfPlayersAfterClick();
+  }
+  // check whether if it has a  Winner
+  if (hasAWinner()) {
+    if (currentPlayer == 0) {
+      alert('X wins');
+    } else {
+      alert('0 wins');
+    }
+    reset();
+    drawBoard();
+  } else if (
+    player2Selections.length + player1Selections.length ==
+    boardSize * boardSize
+  ) {
+    alert(' Its a tie');
+    reset();
+    drawBoard();
+  } else {
+    if (currentPlayer == 0) {
+      //pointer code
+      currentPlayer = 1;
+    } else {
+      currentPlayer = 0;
+    }
+    this.removeEventListener('click', arguments.callee);
+  }
+};
+
+
+
+
+// remove classes and attributes of .omark and .xmark
+function removeAClass() {
+  $('.x').removeClass('omark');
+  $('.o').removeClass('xmark');
+
+  $('table td').removeClass('omark');
+  $('table td').removeClass('xmark');
+
+}
+
+//add and remove class of player1 and player 2
+function changeClassOfPlayersAfterClick() {
+  $('#player1, #player2').click(function () {
+    $(this).removeClass('selected');
+    $(this).addClass('selected');
+
+  });
+}
+
+
 
 window.addEventListener('load', drawBoard);
