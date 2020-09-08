@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Board Game, Tic Tac Toe</title>
+  <title>Dynamic Board Game, Tic Tac Toe</title>
   <link rel="stylesheet" href="./css/style.css">
   <!-- CDN file for jquery -->
   <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -12,28 +12,30 @@
 </head>
 
 <body>
-  <div id="container">
-    <header>
-      <h1> Tic Tac Toe Game</h1>
+  <div id="container" class="play-board">
+    <header class="play-board-title">
+      <h3> Dynamic Tic Tac Toe
     </header>
-    <ul id="play-board">
-      <li id="move1" class="mark"> </li>
-      <li id="move2" class="mark"> </li>
-      <li id="move3" class="mark"> </li>
-      <li id="move4" class="mark"> </li>
-      <li id="move5" class="mark"> </li>
-      <li id="move6" class="mark"> </li>
-      <li id="move7" class="mark"> </li>
-      <li id="move8" class="mark"> </li>
-      <li id="move9" class="mark"> </li>
-    </ul>
-    <div class="clear-fix">
-      <footer>
-        <button id="replay">Replay</button>
-      </footer>
 
+    <div class="player">
+
+      <div style="font-size:30pt;" id="player1" class="selected">.
+      </div>
     </div>
 
+    <table id="play-board" class="tictactoe" style="float:left;width:45%;">
+      <tbody id="tbody">
+
+      </tbody>
+    </table>
+
+    <div class="player">
+
+      <div id="player2" style="font-size:30pt;">.</div>
+    </div>
+
+    <div class="clear">
+    </div>
   </div>
   <script src="./js/app.js"></script>
 </body>
