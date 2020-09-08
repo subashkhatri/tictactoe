@@ -1,24 +1,17 @@
 var winners = new Array();
 var player1Selections = new Array();
 var player2Selections = new Array();
-var parent;
 
-var numberOfPlayers = 2;
 var currentPlayer = 0;
 var mark = '';
 
-function getBoardSize() {
-  var x = prompt('Please enter value over 3');
-  var boardSize = parseInt(x);
-
-  return boardSize;
-}
-var boardSize = getBoardSize();
-
-
+var x = prompt('Please enter value over 3');
+var boardSize = parseInt(x);
 
 // Function for drawing a Board
 function drawBoard() {
+  var parent;
+
   parent = document.getElementById('play-board');
   var counter = 1;
 
@@ -96,11 +89,7 @@ function setWinnerCombination() {
 function hasAWinner() {
   var win = false;
   var playerSelections = new Array();
-  if (currentPlayer == 0) {
-    playerSelections = player1Selections;
-  } else {
-    playerSelections = player2Selections;
-  }
+  playerSelections = currentPlayer == 0 ? player1Selections : player2Selections;
   if (playerSelections.length >= boardSize) {
     // setting winners from its length
     for (sets = 0; sets < winners.length; sets++) {
@@ -168,6 +157,7 @@ function setHoverEffect() {
 var setHandler = function (e) {
   if (currentPlayer == 0) {
     this.innerHTML = 'X';
+
     mark = 'o';
     // document.getElementById('player1').style.color = 'red';
 
@@ -175,14 +165,14 @@ var setHandler = function (e) {
     player1Selections.sort(function (a, b) {
       return a - b; // sorting in accending order
     });
+
     this.classList.add('x');
     this.classList.add('disable');
     $('.x').removeClass('xmark');
 
     changeClassOfPlayersAfterClick();
 
-    // d('player1').classList.remove('selected'); //removeing the id of player which is selected
-    // d('player2').classList.add('selected'); //adding the id of selected next player
+    //adding the id of selected next player
   } else {
     this.innerHTML = 'O';
     mark = 'x';
@@ -221,9 +211,6 @@ var setHandler = function (e) {
     this.removeEventListener('click', arguments.callee);
   }
 };
-
-
-
 
 // remove classes and attributes of .omark and .xmark
 function removeAClass() {
