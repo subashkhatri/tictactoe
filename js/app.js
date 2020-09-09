@@ -1,4 +1,5 @@
 var winners = new Array();
+
 var player1Selections = new Array();
 var player2Selections = new Array();
 
@@ -160,8 +161,7 @@ var setHandler = function (e) {
       return a - b; // sorting in accending order
     });
 
-    this.classList.add('x');
-    this.classList.add('disable');
+    this.classList.add('x', 'disable');
     $('.x').removeClass('xmark');
   } else {
     this.innerHTML = 'O';
@@ -170,8 +170,7 @@ var setHandler = function (e) {
     player2Selections.sort(function (a, b) {
       return a - b; // sorting in accending order
     });
-    this.classList.add('o');
-    this.classList.add('disable');
+    this.classList.add('o', 'disable');
     $('.o').removeClass('omark');
   }
   // check whether if it has a  Winner
