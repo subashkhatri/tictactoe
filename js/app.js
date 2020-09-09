@@ -1,23 +1,17 @@
 var winners = new Array();
-
 var player1Selections = new Array();
 var player2Selections = new Array();
-
 var currentPlayer = 0;
 var mark = '';
-
-var x = prompt('Please enter value over 3');
+var x = prompt('Please enter value over 3'); //input from user
 var boardSize = parseInt(x);
 
 // Function for drawing a Board
 function drawBoard() {
-  var parent;
-
+  var parent; //setting local varaible
   parent = document.getElementById('play-board');
   var counter = 1;
-
   //while creates a loop with given boardSize for eg = 3 and until we reload the window the board boardSize of the game will be 3 * 3
-
   while (parent.hasChildNodes()) {
     parent.removeChild(parent.firstChild);
   }
@@ -85,6 +79,7 @@ function setWinnerCombination() {
   }
   winners.push(diagonalIndexTwo);
 }
+
 // retruns if it has winner or not?
 function hasAWinner() {
   var win = false;
@@ -117,6 +112,7 @@ function hasAWinner() {
   return win;
 }
 
+//Reset function
 function reset() {
   currentPlayer = 0;
   player1Selections = new Array();
@@ -124,7 +120,6 @@ function reset() {
 }
 
 // hover function for displaying the turn of player1 and player 2
-
 function setHoverEffect() {
   $('table td').mouseover(function () {
     console.log(mark);
@@ -148,19 +143,14 @@ function setHoverEffect() {
 }
 
 // function for setting the handler that places each player turn on the board cell
-
 var setHandler = function (e) {
   if (currentPlayer == 0) {
     this.innerHTML = 'X';
-
     mark = 'o';
-    // document.getElementById('player1').style.color = 'red';
-
     player1Selections.push(parseInt(this.id));
     player1Selections.sort(function (a, b) {
       return a - b; // sorting in accending order
     });
-
     this.classList.add('x', 'disable');
     $('.x').removeClass('xmark');
   } else {
