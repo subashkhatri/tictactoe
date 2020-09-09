@@ -120,7 +120,6 @@ function reset() {
   currentPlayer = 0;
   player1Selections = new Array();
   player2Selections = new Array();
-  changeClassOfPlayersAfterClick();
 }
 
 // hover function for displaying the turn of player1 and player 2
@@ -164,10 +163,6 @@ var setHandler = function (e) {
     this.classList.add('x');
     this.classList.add('disable');
     $('.x').removeClass('xmark');
-
-    changeClassOfPlayersAfterClick();
-
-    //adding the id of selected next player
   } else {
     this.innerHTML = 'O';
     mark = 'x';
@@ -178,7 +173,6 @@ var setHandler = function (e) {
     this.classList.add('o');
     this.classList.add('disable');
     $('.o').removeClass('omark');
-    changeClassOfPlayersAfterClick();
   }
   // check whether if it has a  Winner
   if (hasAWinner()) {
@@ -197,17 +191,8 @@ var setHandler = function (e) {
     this.removeEventListener('click', arguments.callee);
   }
 };
-
 // remove classes and attributes of .omark and .xmark
 function removeAClass() {
   $('table td, .x, .o').removeClass('omark xmark');
 }
-
-//add and remove class of player1 and player 2
-function changeClassOfPlayersAfterClick() {
-  $('#player1, #player2').click(function () {
-    $(this).removeClass('selected').addClass('selected');
-  });
-}
-
 window.addEventListener('load', drawBoard);
