@@ -1,6 +1,6 @@
-var winners = new Array();
-var player1Selections = new Array();
-var player2Selections = new Array();
+var winners = [];
+var player1Selections = [];
+var player2Selections = [];
 var currentPlayer = 0;
 var mark = '';
 var x = prompt('Please enter value over 3'); //input from user
@@ -83,7 +83,7 @@ function setWinnerCombination() {
 // retruns if it has winner or not?
 function hasAWinner() {
   var win = false;
-  var playerSelections = new Array();
+  var playerSelections = [];
   playerSelections = currentPlayer == 0 ? player1Selections : player2Selections;
   if (playerSelections.length >= boardSize) {
     // setting winners from its length
@@ -115,8 +115,8 @@ function hasAWinner() {
 //Reset function
 function reset() {
   currentPlayer = 0;
-  player1Selections = new Array();
-  player2Selections = new Array();
+  player1Selections = [];
+  player2Selections = [];
 }
 
 // hover function for displaying the turn of player1 and player 2
@@ -165,7 +165,13 @@ var setHandler = function (e) {
   }
   // check whether if it has a  Winner
   if (hasAWinner()) {
-    currentPlayer == 0 ? alert('X Wins the game') : alert('O Wins the game'); // alerts whether X wins or O wins;
+    if (currentPlayer == 0) {
+      alert('X Wins the game');
+
+    } else {
+      alert('O Wins the game');
+    }
+    //  whether X wins or O wins;
     reset();
     drawBoard();
   } else if (
