@@ -1,104 +1,99 @@
 body {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   background: #4fd9fc;
-  color: rgb(223, 144, 41);
-  font-family: 'Times New Roman', Times, serif;
-
+  color: #df9029;
+  font-family: 'Times New Roman', Times, serif
 }
 
 #container {
   width: auto;
   overflow: auto;
   margin: 40px auto;
-  background-color: rgb(57, 95, 92);
+  background-color: #395f5c;
   margin-right: 50px;
   margin-left: 50px;
   padding-bottom: 40px;
-  border-radius: 10px;
+  border-radius: 10px
 }
 
 .play-board td {
-  background-color: rgb(223, 144, 41);
+  background-color: #df9029;
   width: 100px;
   height: 100px;
-  border: solid 3px rgb(51, 15, 15);
+  border: solid 3px #330f0f;
   text-align: center;
   font-size: 40pt;
   border-radius: 3px;
-  box-sizing: border-box;
+  box-sizing: border-box
 }
 
 .play-board td:hover {
-  /* background-color: rgb(41, 90, 223); */
-  cursor: pointer;
+  cursor: pointer
 }
 
 .play-board td.x {
-  color: red !important;
+  color: red !important
 }
 
 .play-board td.o {
-  color: rgb(117, 24, 136) !important;
+  color: #751888 !important
 }
 
 .omark {
-  background-image: url("../images/o.png");
+  background-image: url(../images/o.png);
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat
 }
 
 .xmark {
-  background-image: url("../images/x.png");
+  background-image: url(../images/x.png);
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat
 }
 
 .play-board {
   margin-top: 25px;
   background: #efefef;
-  border: solid 10px rgb(71, 5, 5);
+  border: solid 10px #470505
 }
 
 .play-board .play-board-title {
-  /* background: #222; */
   text-align: center;
-  color: rgb(223, 144, 41);
+  color: #df9029;
   font-size: 30pt;
-  padding: 10px;
+  padding: 10px
 }
 
 .play-board .player {
   float: left;
   text-align: center;
-  width: 25%;
+  width: 25%
 }
 
 .tictactoe-board {
-
   text-align: center;
   margin: 0 auto;
-  width: 50%;
+  width: 50%
 }
-
 
 .tictactoe-board table {
   height: auto;
   width: auto;
   float: left;
-  border-radius: 5px;
+  border-radius: 5px
 }
 
 .tictactoe-board-score1 {
   float: left;
-  width: 20%;
+  width: 20%
 }
 
 .tictactoe-board-score2 {
   float: left;
-  width: 20%;
+  width: 20%
 }
 
 .clear {
-  clear: both;
+  clear: both
 }
