@@ -37,5 +37,4 @@ function reset() {
   playerFirstSelections = [];
   playerSecondSelections = [];
 }
-window.addEventListener('load', drawBoard);
 
