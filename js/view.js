@@ -111,6 +111,12 @@
       removeAClass();
     });
   }
+  //Reset function
+function reset() {
+  currentPlayer = 0;
+  playerFirstSelections = [];
+  playerSecondSelections = [];
+}
 
 
 

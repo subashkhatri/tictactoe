@@ -31,10 +31,5 @@ function hasAWinner() {
   return this.win;
 }
 
-//Reset function
-function reset() {
-  currentPlayer = 0;
-  playerFirstSelections = [];
-  playerSecondSelections = [];
-}
+
 
