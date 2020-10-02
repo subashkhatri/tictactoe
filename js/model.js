@@ -4,44 +4,44 @@ function setValueForRowAndColumn(){
 
   for (j = 0; j < boardSize; j++) {
     //for pushing rows into winners array
-    var rowIndex = [];
+    this.rowIndex = [];
     //i = rowNum
     for (i = 0; i < boardSize; i++) {
-      rowIndex.push(valueForRow);
+      this.rowIndex.push(valueForRow);
       valueForRow++;
     }
-    console.log(rowIndex);
-    winners.push(rowIndex);
+    // console.log(this.rowIndex);
+    winners.push(this.rowIndex);
     //for pushing columns into winners array
-    var columnIndex = [];
-    var tempvalueForColumn = valueForColumn;
+    this.columnIndex = [];
+    this.tempvalueForColumn = valueForColumn;
     //i = colNum
     for (i = 0; i < boardSize; i++) {
-      columnIndex.push(tempvalueForColumn);
-      tempvalueForColumn += boardSize;
+      this.columnIndex.push(this.tempvalueForColumn);
+      this.tempvalueForColumn += boardSize;
     }
-    winners.push(columnIndex);
+    winners.push(this.columnIndex);
     valueForColumn++;
   }
 
 }
 function setValueForDiagonals(){
   var valueForDiagonal = 1;  
-  var diagonalIndexOne = [];
+  this.diagonalIndexOne = [];
   // l = Digonal Num
   for (l = 0; l < boardSize; l++) {
-    diagonalIndexOne.push(valueForDiagonal);
+    this.diagonalIndexOne.push(valueForDiagonal);
     valueForDiagonal += boardSize + 1;
   }
-  winners.push(diagonalIndexOne);
+  winners.push(this.diagonalIndexOne);
   valueForDiagonal = boardSize;
-  var diagonalIndexTwo = [];
+  this.diagonalIndexTwo = [];
   // l = Digonal Num
   for (l = 0; l < boardSize; l++) {
-    diagonalIndexTwo.push(valueForDiagonal);
+    this.diagonalIndexTwo.push(valueForDiagonal);
     valueForDiagonal += boardSize - 1;
   }
-  winners.push(diagonalIndexTwo);
+  winners.push(this.diagonalIndexTwo);
 
 }
 

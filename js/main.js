@@ -1,34 +1,34 @@
 
 function hasAWinner() {
-  var win = false;
-  var playerSelections = [];
-  playerSelections =
+  this.win = false;
+  this.playerSelections = [];
+  this.playerSelections =
     currentPlayer == 0 ? playerFirstSelections : playerSecondSelections;
-  if (playerSelections.length >= boardSize) {
+  if (this.playerSelections.length >= boardSize) {
     // setting winners from its length
     for (sets = 0; sets < winners.length; sets++) {
-      var setWinner = winners[sets];
-      var setFound = true;
+      this.setWinner = winners[sets];
+      this.setFound = true;
       for (rowIndex = 0; rowIndex < setWinner.length; rowIndex++) {
-        var found = false;
-        for (s = 0; s < playerSelections.length; s++) {
-          if (setWinner[rowIndex] == playerSelections[s]) {
-            found = true;
+         this.found = false;
+        for (s = 0; s < this.playerSelections.length; s++) {
+          if (this.setWinner[rowIndex] == this.playerSelections[s]) {
+            this.found = true;
             break;
           }
         }
-        if (found == false) {
-          setFound = false;
+        if (this.found == false) {
+          this.setFound = false;
           break;
         }
       }
-      if (setFound == true) {
-        win = true;
+      if (this.setFound == true) {
+        this.win = true;
         break;
       }
     }
   }
-  return win;
+  return this.win;
 }
 
 //Reset function
