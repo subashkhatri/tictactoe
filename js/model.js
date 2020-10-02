@@ -1,4 +1,6 @@
+var winners = [];
 function setValueForRowAndColumn(){
+  
   var valueForRow = 1;
   var valueForColumn = 1;
 
